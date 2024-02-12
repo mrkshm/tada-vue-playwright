@@ -23,11 +23,6 @@ export const useTodosStore = defineStore('todos', {
       }
       this.todos.push(newTodo)
     },
-    getTodo(id: number) {
-      const todo = this.todos.find((todo) => todo.id === id)
-      if (todo) return todo
-      //   return 'not found'
-    },
     toggleTodo(id: number) {
       const todo = this.todos.find((todo) => todo.id === id)
       if (todo) {
@@ -42,6 +37,11 @@ export const useTodosStore = defineStore('todos', {
     },
     removeTodo(id: number) {
       this.todos = this.todos.filter((todo) => todo.id !== id)
+    }
+  },
+  getters: {
+    getTodo: (state) => {
+      return (id: number) => state.todos.find((todo) => todo.id === id)
     }
   }
 })
